@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Livros</title>
+    <title>Lista de Generos</title>
     <style>
         /* Resetando margens e padding */
         * {
@@ -161,35 +161,33 @@
 <body>
     <!-- MENU -->
     <header class="header">
-        <a href="#" class="logo">Controle de Livros</a>
+        <a href="#" class="logo">Controle de Gêneros</a>
         <ul class="menu">
-            <li><a href="/livros/criar">Cadastrar</a></li>
+            <li><a href="/generos/criar">Cadastrar</a></li>
         </ul>
     </header>
 
     <!-- Conteúdo principal -->
     <div class="content">
-        <h1>Lista de Livros</h1>
+        <h1>Lista de Generos</h1>
 
         <!-- Tabela para exibir os livros cadastrados -->
         <table>
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Nome</th>
                     <th>Gênero</th>
                     <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
                 <!-- Exemplo de livros (esses dados serão gerados dinamicamente) -->
-                <tr th:each="livro : ${livros}">
-                    <td th:text="${livro.idLivro}"></td>
-                    <td th:text="${livro.nomeLivro}"></td>
-                    <td th:text="${livro.generoLivro.nomeGenero}"></td>
+                <tr th:each="genero : ${generos}">
+                    <td th:text="${genero.idGenero}"></td>
+                    <td th:text="${genero.nomeGenero}"></td>
                     <td class="actions">
-                        <a th:href="@{/livros/editar/{id}(id=${livro.idLivro})}">Editar</a>
-                        <a th:href="@{/livros/excluir/{id}(id=${livro.idLivro})}">Excluir</a>
+                        <a th:href="@{/generos/editar/{id}(id=${genero.idGenero})}">Editar</a>
+                        <a th:href="@{/generos/excluir/{id}(id=${genero.idGenero})}">Excluir</a>
                     </td>
                 </tr>
             </tbody>

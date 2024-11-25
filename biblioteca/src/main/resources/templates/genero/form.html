@@ -15,8 +15,8 @@
 
         /* Estilizando o corpo da página */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f7f9fc;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
             color: #333;
             text-align: center;
             padding-top: 60px;
@@ -25,7 +25,7 @@
         /* Header com o menu */
         .header {
             background-color: #333;
-            padding: 15px 20px;
+            padding: 10px 20px;
             position: fixed;
             width: 100%;
             top: 0;
@@ -40,7 +40,7 @@
         .logo {
             color: #fff;
             text-decoration: none;
-            font-size: 26px;
+            font-size: 24px;
             font-weight: bold;
             text-transform: uppercase;
         }
@@ -61,7 +61,7 @@
             text-decoration: none;
             font-size: 18px;
             font-weight: bold;
-            padding: 10px 15px;
+            padding: 10px 0;
             position: relative;
             transition: color 0.3s ease, transform 0.3s ease;
         }
@@ -91,7 +91,7 @@
 
         /* Estilo do conteúdo */
         .content {
-            margin-top: 120px; /* Espaço para o menu fixo */
+            margin-top: 100px; /* Espaço para o menu fixo */
         }
 
         /* Título */
@@ -99,60 +99,51 @@
             font-size: 36px;
             color: #333;
             margin-bottom: 30px;
-            font-weight: 600;
         }
 
         /* Estilo do formulário */
         form {
             background-color: #fff;
             padding: 30px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 80%;
             max-width: 600px;
             margin: 0 auto;
             border-radius: 8px;
         }
 
-        .form-group {
-            margin-bottom: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
+        form table {
+            width: 100%;
+        }
+
+        form td {
+            padding: 10px;
+            text-align: left;
         }
 
         form label {
             font-size: 18px;
             color: #555;
-            margin-bottom: 8px;
+            display: block;
         }
 
-        form input[type="text"],
-        form select {
+        form input[type="text"], form select {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             margin-top: 5px;
             border: 1px solid #ccc;
-            border-radius: 6px;
+            border-radius: 4px;
             font-size: 16px;
-            transition: border-color 0.3s ease;
         }
 
-        form input[type="text"]:focus,
-        form select:focus {
-            border-color: #3498db;
-            outline: none;
-        }
-
-        /* Botão para submeter */
         form button {
             background-color: #3498db;
             color: white;
             border: none;
-            padding: 12px 20px;
-            border-radius: 6px;
+            padding: 10px 20px;
+            border-radius: 4px;
             font-size: 18px;
             cursor: pointer;
-            width: 100%;
             transition: background-color 0.3s ease;
         }
 
@@ -162,6 +153,15 @@
 
         form button:focus {
             outline: none;
+        }
+
+        /* Ajustando a tabela dentro do formulário */
+        .form-row {
+            margin-bottom: 20px;
+        }
+
+        .form-row td {
+            width: 50%;
         }
 
     </style>
@@ -178,26 +178,23 @@
 
     <!-- Conteúdo principal -->
     <div class="content">
-        <h1>Cadastrar Livro</h1>
+        <h1>Cadastrar Gênero</h1>
 
         <!-- Formulário de Cadastro de Livro -->
-        <form th:action="@{/livros/salvar}" th:object="${livro}" method="post">
-            <input type="hidden" th:field="*{idLivro}" />
+        <form th:action="@{/generos/salvar}" th:object="${genero}" method="post">
+            <input type="hidden" th:field="*{idGenero}" />
 
-            <div class="form-group">
-                <label for="nomeLivro">Nome do Livro:</label>
-                <input type="text" th:field="*{nomeLivro}" id="nomeLivro" placeholder="Digite o nome do livro" required/>
+            <div class="form-row">
+                <table align="center" border="0">
+                    <tr>
+                        <td><label for="nomeGenero">Genero:</label></td>
+                        <td><input type="text" th:field="*{nomeGenero}" id="nomeGenero" placeholder="Digite o nome do genero" required/></td>
+                    </tr>
+                </table>
             </div>
 
-            <div class="form-group">
-                <label for="generoLivro">Gênero:</label>
-                <select th:field="*{generoLivro}" id="generoLivro" required>
-                    <option value="">Selecione um gênero</option>
-                    <option th:each="genero : ${generos}" th:value="${genero.idGenero}" th:text="${genero.nomeGenero}"></option>
-                </select>
-            </div>
-
-            <div class="form-group">
+            <!-- Botão para submeter -->
+            <div class="form-row">
                 <button type="submit">Salvar</button>
             </div>
         </form>

@@ -11,16 +11,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Livro {
+public class Genero {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idLivro;
+    private Long idGenero;
 
     @Column(nullable = false, length = 40)
-    private String nomeLivro;
-
-    @ManyToOne
-    @JoinColumn(name = "id_genero", nullable = false) // A chave estrangeira do gênero
-    private Genero generoLivro;  // Tipo de dado alterado para 'Genero' em vez de 'String'
+    private String nomeGenero;
 }

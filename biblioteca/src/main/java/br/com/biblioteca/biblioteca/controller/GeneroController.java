@@ -11,62 +11,54 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.com.biblioteca.biblioteca.entity.Livro;
+import br.com.biblioteca.biblioteca.entity.Genero;
 import br.com.biblioteca.biblioteca.service.GeneroService;
-import br.com.biblioteca.biblioteca.service.LivroService;
 
 @Controller
-@RequestMapping("/livros")
-public class LivroController {
-
+@RequestMapping("/generos")
+public class GeneroController {
     @Autowired
-    private LivroService service;
+    private GeneroService service;
     
-    @Autowired
-    private GeneroService generoService;
-
-    // Método para listar todos os livros
     @GetMapping("/listar")
     public String listar(Model model) {
         // Busca todos os livros
-        List<Livro> livros = service.findAll();
+        List<Genero> generos = service.findAll();
         // Adiciona os livros ao modelo
-        model.addAttribute("livros", livros);
+        model.addAttribute("generos", generos);
         // Retorna a página de lista de livros
-        return "livro/lista";
+        return "genero/lista";
     }
 
     // Método para abrir o formulário de criação de livro
     @GetMapping("/criar")
     public String criarForm(Model model) {
         // Adiciona um novo livro ao modelo
-        model.addAttribute("livro", new Livro());
-        model.addAttribute("generos", generoService.findAll());
+        model.addAttribute("genero", new Genero());
         // Retorna a página do formulário de livros
-        return "livro/form";
+        return "genero/form";
     }
 
     // Método para salvar um livro
     @PostMapping("/salvar")
-    public String salvar(@ModelAttribute Livro livro) {
+    public String salvar(@ModelAttribute Genero genero) {
         // Salva o livro
-        service.save(livro);
+        service.save(genero);
         // Redireciona para a lista de livros
-        return "redirect:/livros/listar";
+        return "redirect:/generos/listar";
     }
 
     @GetMapping("/excluir/{id}")
     public String excluir(@PathVariable Long id) {
         service.deleteById(id);
-        return "redirect:/livros/listar";
+        return "redirect:/generos/listar";
     }
 
     @GetMapping("/editar/{id}")
     public String editarForm(@PathVariable Long id, Model model) {
-        Livro livro = service.findById(id);
-        model.addAttribute("livro", livro);
+        Genero genero = service.findById(id);
+        model.addAttribute("genero", genero);
 
-        return "livro/form";
+        return "genero/form";
     }
-    
 }
